@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Info</title>
+    <style>
+        .company-info {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 600px;
+        }
+        .company-info h2 {
+            margin-top: 0;
+        }
+        .company-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Company Name</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="company_name" required>
+        <button type="submit">Get Info</button>
+    </form>
+    {% if info %}
+    <div class="company-info">
+        {% if info.message %}
+        <p>{{ info.message }}</p>
+        {% else %}
+        <h2>Company: {{ info.name }}</h2>
+        <p><strong>Description:</strong> {{ info.description }}</p>
+        <p><strong>Founder:</strong> {{ info.founder }}</p>
+        <p><strong>Founded:</strong> {{ info.founded }}</p>
+        <p><strong>Employees:</strong> {{ info.employees }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>
